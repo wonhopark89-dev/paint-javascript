@@ -1,0 +1,9 @@
+{
+  "name": "vanilla-js",
+  "version": "1.0.0",
+  "description": "vanilla-js",
+  "main": "index.js",
+  "repository": "https://github.com/wonhopark89-dev/vanilla-js.git",
+  "author": "wonhopark89-dev <wonhopark89.dev@gmail.com>",
+  "license": "MIT"
+}
