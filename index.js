@@ -17,7 +17,7 @@ console.log(calculator.plus(5, 6));
 
 // const title = document.getElementById("title");
 const title = document.querySelector("#title"); // # is id on html,
-// const title = document.querySelector(".title"); // dot is class on html, 
+// const title = document.querySelector(".title"); // dot is class on html,
 
 console.log(title);
 title.innerHTML = "hi from js";
@@ -31,10 +31,33 @@ function handleResize(event) {
   console.log(event);
 }
 
+const BASE_COLOR = "rgb(52, 73, 94)";
+const OTHER_COLOR = "red";
+
 function handleClick() {
-  title.style.color = "blue";
+  const currentColor = title.style.color;
+  if (currentColor === BASE_COLOR) {
+    title.style.color = OTHER_COLOR;
+  } else {
+    title.style.color = BASE_COLOR;
+  }
 }
 
-// window.addEventListener("resize", handleResize()); // 바로 실행
-window.addEventListener("resize", handleResize); // 이벤트가 발생할때 실행
-title.addEventListener("click", handleClick);
+function handleOnline() {
+  console.log("welcome back");
+}
+
+function handleOffline() {
+  console.log("bye bye");
+}
+
+function init() {
+  title.style.color = BASE_COLOR;
+  // window.addEventListener("resize", handleResize()); // 바로 실행
+  window.addEventListener("resize", handleResize); // 이벤트가 발생할때 실행
+  title.addEventListener("click", handleClick);
+  window.addEventListener("online", handleOnline);
+  window.addEventListener("offline", handleOffline);
+}
+
+init();
