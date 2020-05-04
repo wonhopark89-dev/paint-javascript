@@ -4,7 +4,20 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = [];
+let toDos = [];
+
+function deleteToDo(event) {
+  // console.log(event.target); // 클릭한 오브젝트를 알 수 있음
+  // console.dir(event); // 버튼(클릭한 오브젝트)을 감싼 부모를 찾을 수 있음
+  const btn = event.target;
+  const li = btn.parentNode;
+  toDoList.removeChild(li);
+  const cleanToDos = toDos.filter(function (toDo) {
+    return toDo.id !== parseInt(li.id); // li 의 id 타입이 string
+  });
+  toDos = cleanToDos;
+  saveToDos();
+}
 
 function saveToDos() {
   localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
@@ -13,14 +26,15 @@ function saveToDos() {
 }
 function paintToDo(text) {
   const li = document.createElement("li");
+
   const delBtn = document.createElement("button");
   delBtn.innerText = "❌";
+  delBtn.addEventListener("click", deleteToDo);
 
   const span = document.createElement("span");
   span.innerHTML = text;
 
-  const newId = toDos.length + 1;
-
+  const newId = Date.now();
   li.appendChild(span);
   li.appendChild(delBtn);
   li.id = newId;
@@ -38,7 +52,12 @@ function paintToDo(text) {
 function handleSubmit(event) {
   event.preventDefault();
   const currentValue = toDoInput.value;
+  if (currentValue === "") {
+    alert("please, input something !");
+    return;
+  }
   paintToDo(currentValue);
+  toDoInput.value = "";
 }
 
 function loadToDos() {
